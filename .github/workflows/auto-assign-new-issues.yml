@@ -1,0 +1,15 @@
+name: Auto-assign New Issues
+on:
+  issues:
+    types: [opened]
+
+env:
+  # Comma-separated list
+  ASSIGNEE_LIST: "@Andrew0Hill"
+
+jobs:
+  assign-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-assign
+        run: gh issue edit ${{ github.event.issue.number }} --add-assignee ${{ env.ASSIGNEE_LIST }}
