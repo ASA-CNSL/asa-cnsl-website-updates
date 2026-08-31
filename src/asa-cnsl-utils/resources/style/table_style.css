@@ -1,0 +1,55 @@
+table {
+    width: 85%;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 14pt;
+    text-align: center;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px
+}
+
+
+td {
+    font-size: 12pt;
+    text-align: left;
+    border: solid white 1.0pt;
+    padding: 1px 10px;
+}
+
+/* Preserve empty rows */
+td:empty::after {
+  content: "\00a0";
+}
+
+tbody {
+    border: solid white 1.0pt
+}
+
+
+tbody tr:nth-child(odd) {
+    background-color: #F2F3F4;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #E7EBF7
+}
+
+thead tr {
+    background-color: #4F81BD;
+    border-bottom: solid white 3.0pt;
+}
+
+.name-column {
+    width: 30%
+}
+
+.position-column {
+    width: 50%
+}
+
+.term-column {
+    width: 20%
+}
