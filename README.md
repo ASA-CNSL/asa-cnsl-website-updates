@@ -10,4 +10,6 @@ The included `asa-cnsl-utils` package can be used to perform some website update
 ### Officer Table Updates
 Updates to the current and historical officer tables should be made in the `.md` files located at `src/asa-cnsl-utils/resources/officers`. 
 
+Updates to table style can be made in `src/asa-cnsl-utils/resources/style/table_style.css`.
+
 You can then run the `generate_officer_html()` function to generate new styled HTML tables for the website. 
