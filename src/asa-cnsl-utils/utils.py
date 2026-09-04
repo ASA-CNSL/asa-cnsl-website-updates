@@ -7,19 +7,19 @@ import markdown
 
 DEFAULT_OUTPUT_PATH = "generated/"
 
-DEFAULT_TABLES = [
-    "current-officers.md",
-    "chair.md",
-    "secretary-treasurer.md",
-    "program-chair.md",
-    "publication-officer.md",
-    "webmaster.md",
-    "communications-officer.md",
-    "section-council-representative.md",
-    "at-large-committee-member.md",
-    "student-liaison.md",
-    "asa-liaison.md",
-]
+DEFAULT_TABLES = {
+    "current-officers.md": "Current Officers",
+    "chair.md": "Chair",
+    "secretary-treasurer.md": "Secretary-Treasurer",
+    "program-chair.md": "Program Chair",
+    "publication-officer.md": "Publication Officer",
+    "webmaster.md": "Webmaster",
+    "communications-officer.md": "Newsletter Editor/Communications Officer",
+    "section-council-representative.md": "Section Council Representative",
+    "at-large-committee-member.md": "At-Large Committee Member",
+    "student-liaison.md": "Student Liaison",
+    "asa-liaison.md": "ASA Liaison",
+}
 
 class UtilRegistry:
     def __init__(self):
@@ -30,7 +30,7 @@ class UtilRegistry:
         pass
 
 
-def generate_officer_html(output_directory: str = None, tables: list[str] = None):
+def generate_officer_html(output_directory: str = None, tables: dict[str, str] = None):
     # Resolve the output directory.
     output_path = pathlib.Path(output_directory if output_directory is not None else DEFAULT_OUTPUT_PATH).joinpath("officers").resolve()
     output_path.mkdir(parents=True, exist_ok=True)
@@ -57,7 +57,7 @@ def generate_officer_html(output_directory: str = None, tables: list[str] = None
 
     # Process markdown into HTML
     combined_table_html = style_html
-    for table in tables:
+    for table, table_heading in tables.items():
         # Read the markdown file
         table_text = resources.files("asa-cnsl-utils").joinpath("resources/officers").joinpath(table).read_text()
         # Convert to HTML
@@ -73,7 +73,7 @@ def generate_officer_html(output_directory: str = None, tables: list[str] = None
         output_path.joinpath(table).with_suffix(".html").write_text(styled_table_html)
         # Add the table HTML to the combined output (except for current officers)
         if table != "current-officers.md":
-            combined_table_html += "\n" + table_html
+            combined_table_html += "\n" + f"<h3>{table_heading}</h3>" + table_html
 
     # Write a combined table
     output_path.joinpath("tables_combined_ordered.html").write_text(combined_table_html)
